@@ -23,7 +23,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "start:emulator": "firebase emulators:start --only firestore --project demo",

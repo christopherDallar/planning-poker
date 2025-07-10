@@ -25,7 +25,7 @@ if (process.env.VITE_USE_FIRESTORE_EMULATOR === 'true') {
   console.log('Using Firestore Emulator');
   // application host name
   const emulatorHost = window.location.hostname;
-  db.useEmulator(emulatorHost, 8080); // Point to the Firestore Emulator
+  db.useEmulator(emulatorHost, 8081); // Point to the Firestore Emulator
 }
 
 export const addGameToStore = async (gameId: string, data: any) => {

@@ -1,26 +1,17 @@
-# Stage 2: Set up the Firebase Emulator and serve the app
 FROM node:20-alpine
 
+# Java para Firebase Emulator
 RUN apk add --no-cache openjdk17
 
-# Install Firebase CLI
-RUN npm install -g firebase-tools serve
+# Instala CLI necesarias
+RUN npm install -g firebase-tools vite
 
-# Set the working directory
 WORKDIR /app
+COPY . .
 
-# Copy the built React app from the previous stage
-COPY build /app/build 
+RUN yarn install
 
-# Copy the Firebase Emulator files (downloaded beforehand)
-COPY firebase-emulators /app/firebase-emulators
+EXPOSE 4000 8081 5173
 
-COPY firebase.json /app/firebase.json
-
-# Expose ports for the React app and Firebase Emulator
-EXPOSE 8080
-EXPOSE 4000
-EXPOSE 3000
-
-# Start both the React app and Firebase Emulator
-CMD ["sh", "-c", "firebase emulators:start --only firestore --project demo & REACT_APP_USE_EMULATOR=true & npx serve -s build -l 3000"]
+# Corre emulador y Vite (React dev server)
+CMD ["sh", "-c", "firebase emulators:start --project demo & yarn start"]

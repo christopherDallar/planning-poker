@@ -1,0 +1,15 @@
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"  # Vite
+      - "4000:4000"  # Firebase Emulator UI
+      - "8081:8081"  # Firestore emulator
+    volumes:
+      - .:/app
+    environment:
+      - REACT_APP_USE_EMULATOR=true
+    command: sh -c "firebase emulators:start --only firestore --project demo & yarn start"
